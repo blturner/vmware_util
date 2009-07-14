@@ -8,17 +8,17 @@
 # * Check VMWare exists and exit if it doesn't (cross-platform)
 
 VM_DIR="${HOME}/Documents/Virtual Machines.localized"
-START_VM="/Library/Application Support/VMware Fusion/vmrun"
-VMS=`find "${VM_DIR}" -name "*.vmwarevm" | grep -v 'Win' | grep -v 'XP'`
+VM_COMMAND="/Library/Application Support/VMware Fusion/vmrun"
+VM_LIST=`find "${VM_DIR}" -name "*.vmwarevm" | grep -v 'Win' | grep -v 'XP'`
 
 # path separators so I can use spaces in filenames
 OLD_IFS=${IFS}; IFS="
 "
 
 echo "Choose a non-Windows VM to start:"
-select opt in $VMS ; do
+select opt in $VM_LIST ; do
     # run file
-    `"${START_VM}" start "${opt}" nogui`
+    `"${VM_COMMAND}" start "${opt}" nogui`
     # repair IFS
     IFS=${OLD_IFS}
     exit 0
